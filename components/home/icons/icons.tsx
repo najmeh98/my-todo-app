@@ -12,7 +12,7 @@ export const Logo = () => (
   </svg>
 );
 
-export const TodoMore = () => (
+export const TodoMoreIcon = () => (
   <svg
     stroke="currentColor"
     fill="currentColor"
