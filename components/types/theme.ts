@@ -13,8 +13,14 @@ export interface Theme {
     textcolor: string;
     buttoncolor: string;
     InputBgcolor: string;
+    colorIcon: string;
   };
   boxShadow: string;
+  boxShadowItem: string;
+  boxShadowbox: string;
+  modalBoxShadow: string;
   borderRadius: string;
   height: number;
+  width: string;
+  padding: string;
 }
