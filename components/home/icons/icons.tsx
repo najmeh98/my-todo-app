@@ -1,3 +1,5 @@
+import { SVGProps } from "react";
+
 export const Logo = () => (
   <svg
     stroke="currentColor"
@@ -24,3 +26,17 @@ export const TodoMoreIcon = () => (
     <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"></path>
   </svg>
 );
+
+export function ArrowDown(
+  props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>
+) {
+  return (
+    <svg width={24} height={24} viewBox="0 0 24 24" fill="none" {...props}>
+      <path
+        d="M17.293 8.293a1 1 0 111.414 1.414l-6 6a1 1 0 01-1.383.03l-6-5.5a1 1 0 011.352-1.474l5.294 4.853 5.323-5.323z"
+        fill={props.color ? props.color : "#fff"}
+        opacity={props.opacity ? props.opacity : 1}
+      />
+    </svg>
+  );
+}
