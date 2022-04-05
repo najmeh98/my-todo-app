@@ -1,8 +1,9 @@
 import styled, { css } from "styled-components";
 import { SiNextdotjs, SiTypescript } from "react-icons/si";
-import { desktop } from "../utils/media";
+import { desktop, notdesktop, tablet } from "../utils/media";
 import { useTheme } from "./Context/ThemeContext";
 import { ThemedText } from "./ThemedText";
+import { NodeNextRequest } from "next/dist/server/base-http/node";
 export const Header = () => {
   let theme = useTheme();
 
@@ -13,7 +14,7 @@ export const Header = () => {
       <ThemedText
         Style={{
           margin: "0px",
-          fontSize: "1.875rem",
+          // fontSize: "1.875rem",
           lineHeight: "2.25rem",
           fontWeight: "700",
           display: "flex",
@@ -31,21 +32,14 @@ export const Header = () => {
   );
 };
 
-const LanguageUsed = ({
-  // children,
-  icon,
-  name,
-}: {
-  // children: React.ReactNode;
-  name: any;
-  icon: any;
-}) => {
+const LanguageUsed = ({ icon, name }: { name: any; icon: any }) => {
   let theme = useTheme();
   return (
     <Nav
       style={{
         background: theme.color.buttoncolor,
         color: theme.color.textcolor,
+        fontFamily: theme.fontFamily.MainFont,
       }}
     >
       {icon}
@@ -59,6 +53,7 @@ const Head = styled.div`
   align-items: center;
   justify-content: space-between;
   /* height: 80px; */
+  /* margin-bottom: 50px; */
 `;
 
 const Row = styled.div`
@@ -72,7 +67,8 @@ const Nav = styled.div`
   align-items: center;
   border-radius: 8px;
   line-height: 24px;
-  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+
   svg {
     ${desktop(css`
       margin-right: 0.5rem;
@@ -80,5 +76,14 @@ const Nav = styled.div`
   }
   ${desktop(css`
     width: 13rem;
+    span {
+      display: block;
+    }
+  `)}
+
+  ${notdesktop(css`
+    span {
+      display: none;
+    }
   `)}
 `;
