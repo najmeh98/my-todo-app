@@ -1,7 +1,4 @@
-import Image from "next/image";
 import styled, { css } from "styled-components";
-import { Logo } from "./home/icons/icons";
-import { Layout } from "./Layout";
 import { SiNextdotjs, SiTypescript } from "react-icons/si";
 import { desktop } from "../utils/media";
 import { useTheme } from "./Context/ThemeContext";
@@ -59,9 +56,9 @@ const LanguageUsed = ({
 
 const Head = styled.div`
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-  height: 80px;
+  /* height: 80px; */
 `;
 
 const Row = styled.div`
