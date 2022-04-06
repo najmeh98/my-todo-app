@@ -36,34 +36,35 @@ export const TodoForm = ({ listTodos, setListTodos }: Props) => {
   };
 
   return (
-    <>
-      <Form onSubmit={submitHandler}>
-        <Input
-          value={todoValue}
-          onChange={changeHandler}
-          type="text"
-          placeholder="Search your todo"
-          style={{
-            background: theme.color.InputBgcolor,
-            boxShadow: theme.boxShadow,
-            borderTopLeftRadius: theme.borderRadius,
-            borderBottomLeftRadius: theme.borderRadius,
-            height: theme.height,
-            padding: theme.padding,
-          }}
-        />
-        <Button
-          style={{
-            background: theme.color.buttoncolor,
-            color: theme.color.textcolor,
-            borderTopRightRadius: theme.borderRadius,
-            borderBottomRightRadius: theme.borderRadius,
-          }}
-        >
-          Add
-        </Button>
-      </Form>
-    </>
+    <Form onSubmit={submitHandler}>
+      <Input
+        value={todoValue}
+        onChange={changeHandler}
+        type="text"
+        placeholder="Search your todo"
+        style={{
+          background: theme.color.InputBgcolor,
+          boxShadow: theme.boxShadow,
+          borderTopLeftRadius: theme.borderRadius,
+          borderBottomLeftRadius: theme.borderRadius,
+          height: theme.height,
+          padding: theme.padding,
+          // fontFamily: theme.fontFamily.MainFont,
+          fontSize: theme.fontSize.regular,
+          color: "#fff",
+        }}
+      />
+      <Button
+        style={{
+          background: theme.color.buttoncolor,
+          color: theme.color.textcolor,
+          borderTopRightRadius: theme.borderRadius,
+          borderBottomRightRadius: theme.borderRadius,
+        }}
+      >
+        Add
+      </Button>
+    </Form>
   );
 };
 
@@ -73,16 +74,20 @@ const Form = styled.form`
 
   display: flex;
   align-items: center;
+  /* margin: 20px 0px; */
 `;
 
 const Input = styled.input`
   outline: none;
   border: none;
   width: 100%;
+  font-family: Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+    Helvetica Neue, sans-serif;
   /* height: 40px; */
   color: rgb(10, 60, 73);
   &::placeholder {
     color: rgb(10, 60, 73);
+    font-size: 16px;
   }
 `;
 
