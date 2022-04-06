@@ -1,18 +1,16 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import { type } from "os";
 import { useCallback, useEffect, useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Header } from "../components/Header";
-import { Row } from "../components/shared/Container";
+import { Column, Row } from "../components/shared/Container";
 import { Space } from "../components/shared/Space";
 import SideBar from "../components/SideBar";
 import { TodoForm } from "../components/TodoForm";
 import { TodoList } from "../components/TodoList";
-import styles from "../styles/Home.module.css";
+import { Mobile, notdesktop, tablet } from "../utils/media";
 export interface Todoprop {
-  // map(arg0: () => void): import("react").ReactNode;
   id: number;
   value: string;
   completed: boolean;
@@ -42,23 +40,26 @@ const Home: NextPage = () => {
   }, [hasLoded]);
 
   //filterHandler
-  const filterHandler = useCallback(() => {
-    // setFilter(value);
-    switch (filter) {
-      case "Completed":
-        setFilterTodo(listTodos.filter((task) => task.completed));
-        break;
-      case "Uncompleted":
-        setFilterTodo(listTodos.filter((task) => !task.completed));
-        break;
-      default:
-        setFilterTodo(listTodos);
-        break;
-    }
-  }, [filter, listTodos]);
+  const filterHandler = useCallback(
+    (filter) => {
+      setFilter(filter);
+      switch (filter) {
+        case "Completed":
+          setFilterTodo(listTodos.filter((task) => task.completed));
+          break;
+        case "Uncompleted":
+          setFilterTodo(listTodos.filter((task) => !task.completed));
+          break;
+        default:
+          setFilterTodo(listTodos);
+          break;
+      }
+    },
+    [listTodos]
+  );
 
   useEffect(() => {
-    filterHandler();
+    filterHandler(filter);
   }, [filter, filterHandler, listTodos]);
 
   const handleDeleteTask = (id: number) => {
@@ -95,18 +96,27 @@ const Home: NextPage = () => {
     <Wrapper>
       <Container>
         <Header />
+        {/* <Space vertical={50} /> */}
         <MainContainer>
           <Row>
-            <TodoForm listTodos={listTodos} setListTodos={setListTodos} />
-            <Space vertical={20} />
-            <TodoList
-              filterTodo={filterTodo}
-              onDeleteTask={handleDeleteTask}
-              onChangeTask={handleChangeTask}
-              CompleteHandler={CompleteHandler}
-            />
+            <Column>
+              <TodoForm listTodos={listTodos} setListTodos={setListTodos} />
+              <Space vertical={20} />
+
+              <TodoList
+                filterTodo={filterTodo}
+                onDeleteTask={handleDeleteTask}
+                onChangeTask={handleChangeTask}
+                CompleteHandler={CompleteHandler}
+              />
+            </Column>
+            {/* <img src="No data-cuate.png" alt="emptyTask" /> */}
           </Row>
-          <SideBar />
+          <SideBar
+            filterHandler={filterHandler}
+            setFilter={setFilter}
+            filter={filter}
+          />
         </MainContainer>
       </Container>
     </Wrapper>
@@ -116,25 +126,57 @@ const Home: NextPage = () => {
 export default Home;
 
 const Wrapper = styled.div`
-  min-height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
   padding: 16px;
   font-size: 16px;
   line-height: 24px;
   background-color: #0c4a6e;
+  /* background-color: #023047; */
+
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const Container = styled.div`
   background-color: rgba(0, 0, 0, 0.2);
+  /* background-color: #b5838d; */
   border-radius: 0.375rem;
+  /* overflow: hidden; */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px 50px;
   height: 100%;
-  padding: 8px;
+  min-height: 100%;
   width: 100%;
+  ${notdesktop(css`
+    padding: 20px;
+  `)}
 `;
-const MainContainer = styled.main`
+const MainContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 600px;
-  /* align-items: center; */
+  grid-template-columns: 40% 360px;
+  gap: 80px;
   justify-content: space-between;
-  gap: 20px;
+  height: 100%;
+  margin-top: 40px;
+  justify-content: space-between;
+  /* min-height: 600px; */
+
+  /* display: flex;
+  height: 100%; */
+
+  ${tablet(css`
+    grid-template-columns: 50% 330px;
+    gap: 20px;
+  `)}
+  ${Mobile(css`
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+  `)}
 `;
