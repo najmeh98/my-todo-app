@@ -34,7 +34,7 @@ export const TodoTask = ({
     enter: { x: 0, opacity: 1 },
     leave: { x: 20, opacity: 0 },
   });
-  console.log(onCompleteTask);
+
   return (
     <>
       <TaskList
@@ -44,9 +44,20 @@ export const TodoTask = ({
           padding: theme.padding,
           boxShadow: theme.boxShadowItem,
         }}
-        checked
       >
-        <p onClick={onCompleteTask}>{item.value}</p>
+        <Text
+          onClick={onCompleteTask}
+          style={
+            item.completed
+              ? {
+                  textDecoration: "line-through",
+                  opacity: 0.5,
+                }
+              : { opacity: 1 }
+          }
+        >
+          {item.value}
+        </Text>
         <span onClick={handleMenu}>
           <TodoMoreIcon />
         </span>
@@ -115,15 +126,11 @@ const TaskList = styled.div`
   cursor: pointer;
   justify-content: space-between;
   margin-bottom: 15px;
-  p {
-    margin: 0;
-    ${(p) =>
-      p.checked &&
-      css`
-        text-decoration: line-through;
-        color: #58686860;
-      `};
-  }
+`;
+
+const Text = styled.div`
+  width: 100%;
+  font-size: 18px;
 `;
 
 const Menu = styled.div`
