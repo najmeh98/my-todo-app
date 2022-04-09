@@ -21,7 +21,7 @@ export const ThemedText = ({
   return (
     <h1
       style={{
-        fontSize: t.fontSize[fontSize || "normal"],
+        // fontSize: t.fontSize[fontSize || "normal"],
         fontWeight: t.fontWeight[fontWeight || "regular"],
         fontFamily: t.fontFamily[fontFamily],
         color: t.color.textcolor,
