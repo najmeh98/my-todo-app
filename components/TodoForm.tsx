@@ -1,74 +1,106 @@
-import { CSSProperties, SetStateAction, useState } from "react";
+import {
+  CSSProperties,
+  SetStateAction,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import styled from "styled-components";
 import { Todoprop } from "../pages";
 import { useTheme } from "./Context/ThemeContext";
+import { StandardInput } from "./Input";
 import { Row } from "./shared/Container";
 
-// type Props = {
-//   type: string;
-//   placeholder?: string;
-//   value: string;
-//   setValue: () => void;
-//   style?: CSSProperties | undefined;
-//   width?: number;
-// };
-
 type Props = {
+  item: { value: string; id: number };
   listTodos: any;
   setListTodos: ([]) => void;
+  isEditing: boolean;
 };
 
-export const TodoForm = ({ listTodos, setListTodos }: Props) => {
+export const TodoForm = ({
+  listTodos,
+  item,
+  setListTodos,
+  isEditing,
+}: Props) => {
   let theme = useTheme();
-  const [todoValue, setTodoValue] = useState<string>("");
+  const [todoValue, setTodoValue] = useState<string>(item?.value || "");
 
   const changeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTodoValue(e.target.value);
+    let value = e.target.value;
+    setTodoValue(value);
   };
+
+  // const submitEditHandler = (value: string) => {
+  //   if (todoValue && item) {
+  //     onChangeTask(todoValue, item?.id);
+  //   }
+  // };
+  console.log(todoValue);
+
+  // const onSubmit = (e: { preventDefault: () => void }) => {
+  //   e.preventDefault();
+  //   if (todoValue) submitHandler(todoValue, item?.id);
+  //   setTodoValue("");
+  //   if (isEditing) {
+  //     setIsEditing(false);
+  //   }
+  //   // setIsOpen(false);
+  // };
 
   const submitHandler = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     setListTodos([
       ...listTodos,
-      { value: todoValue, completed: false, id: Math.random() * 1000 },
+      {
+        value: todoValue,
+        completed: false,
+        id: Math.floor(Math.random() * 1000),
+      },
     ]);
     setTodoValue("");
   };
 
   return (
-    <Form onSubmit={submitHandler}>
-      <Input
-        value={todoValue}
-        onChange={changeHandler}
-        type="text"
-        placeholder="Search your todo"
-        style={{
-          background: theme.color.InputBgcolor,
-          boxShadow: theme.boxShadow,
-          borderTopLeftRadius: theme.borderRadius,
-          borderBottomLeftRadius: theme.borderRadius,
-          height: theme.height,
-          padding: theme.padding,
-          // fontFamily: theme.fontFamily.MainFont,
-          fontSize: theme.fontSize.regular,
-          color: "#fff",
-        }}
-      />
-      <Button
-        style={{
-          background: theme.color.buttoncolor,
-          color: theme.color.textcolor,
-          borderTopRightRadius: theme.borderRadius,
-          borderBottomRightRadius: theme.borderRadius,
-        }}
-      >
-        Add
-      </Button>
-    </Form>
+    <>
+      <Form onSubmit={submitHandler}>
+        <StandardInput
+          value={todoValue}
+          onChange={changeHandler}
+          type="text"
+          placeholder="Search your todo"
+        />
+        {isEditing ? (
+          <Button
+            style={{
+              background: theme.color.buttoncolor,
+              color: theme.color.textcolor,
+              borderTopRightRadius: theme.borderRadius,
+              borderBottomRightRadius: theme.borderRadius,
+            }}
+          >
+            Save
+          </Button>
+        ) : (
+          <Button
+            style={{
+              background: theme.color.buttoncolor,
+              color: theme.color.textcolor,
+              borderTopRightRadius: theme.borderRadius,
+              borderBottomRightRadius: theme.borderRadius,
+            }}
+            // onClick={submitHandler}
+          >
+            Add
+          </Button>
+        )}
+      </Form>
+    </>
   );
 };
 
-const Form = styled.form`
+export const Form = styled.form`
   /* max-width: 700px; */
   width: 100%;
 
