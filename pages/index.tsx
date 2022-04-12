@@ -20,7 +20,7 @@ const Home: NextPage = () => {
   const [listTodos, setListTodos] = useState<Todoprop[]>([]);
   const [filter, setFilter] = useState<string>("All");
   const [hasLoded, setHasLoded] = useState(false);
-  const [filterTodo, setFilterTodo] = useState([]);
+  const [filterTodo, setFilterTodo] = useState<Todoprop[]>([]);
   //save list of tasks in localStorage
   useEffect(() => {
     if (hasLoded) {
@@ -68,11 +68,19 @@ const Home: NextPage = () => {
   };
 
   const handleChangeTask = (value: string, id: number) => {
+    // return listTodos.map((item) => {
+    //   if (item.id === id) {
+    //     item.value = value;
+    //   } else {
+    //     return item;
+    //   }
+    // });
     let index = listTodos.findIndex((p) => p.id === id);
-    let text = listTodos[index].value;
+    //prev value
+    // let task = listTodos[index].value;
     setListTodos([
       ...listTodos.slice(0, index),
-      { ...listTodos[index], value: text },
+      { ...listTodos[index], value: value },
       ...listTodos.slice(index + 1),
     ]);
   };
@@ -90,6 +98,18 @@ const Home: NextPage = () => {
         }
       })
     );
+  };
+  const submitHandler = (e: { preventDefault: () => void }, value: string) => {
+    // e.preventDefault();
+    setListTodos([
+      ...listTodos,
+      {
+        value: value,
+        completed: false,
+        id: Math.floor(Math.random() * 1000),
+      },
+    ]);
+    // setTodoValue("");
   };
 
   return (
@@ -114,8 +134,8 @@ const Home: NextPage = () => {
           </Row>
           <SideBar
             filterHandler={filterHandler}
-            setFilter={setFilter}
-            filter={filter}
+            setSelectedItem={setFilter}
+            selectedItem={filter}
           />
         </MainContainer>
       </Container>
@@ -126,25 +146,20 @@ const Home: NextPage = () => {
 export default Home;
 
 const Wrapper = styled.div`
-  /* overflow: hidden; */
   padding: 16px;
   font-size: 16px;
   line-height: 24px;
   background-color: #0c4a6e;
   /* background-color: #023047; */
-
   height: 100vh;
   width: 100vw;
   overflow-y: auto;
   overflow-x: hidden;
 `;
-
 const Container = styled.div`
-  background-color: rgba(0, 0, 0, 0.2);
-  /* background-color: #b5838d; */
+  /* background-color: rgba(0, 0, 0, 0.2); */
+  background-color: #1b212d;
   border-radius: 0.375rem;
-  /* overflow: hidden; */
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -164,11 +179,6 @@ const MainContainer = styled.div`
   height: 100%;
   margin-top: 40px;
   justify-content: space-between;
-  /* min-height: 600px; */
-
-  /* display: flex;
-  height: 100%; */
-
   ${tablet(css`
     grid-template-columns: 50% 330px;
     gap: 20px;
