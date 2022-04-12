@@ -1,6 +1,7 @@
 export interface Theme {
   fontSize: {
     normal: string;
+    regular: string;
   };
   fontFamily: {
     MainFont: string;
@@ -14,6 +15,8 @@ export interface Theme {
     buttoncolor: string;
     InputBgcolor: string;
     colorIcon: string;
+    optionbgColor: string;
+    optionColor: string;
   };
   boxShadow: string;
   boxShadowItem: string;
