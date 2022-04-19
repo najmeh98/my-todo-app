@@ -1,4 +1,6 @@
 import { ReactNode } from "react";
+import styled, { css } from "styled-components";
+import { noMobile } from "../utils/media";
 import { useTheme } from "./Context/ThemeContext";
 import { Theme } from "./types/theme";
 
@@ -19,7 +21,7 @@ export const ThemedText = ({
 }) => {
   let t = useTheme();
   return (
-    <h1
+    <Text
       style={{
         // fontSize: t.fontSize[fontSize || "normal"],
         fontWeight: t.fontWeight[fontWeight || "regular"],
@@ -32,6 +34,12 @@ export const ThemedText = ({
       }}
     >
       {children}
-    </h1>
+    </Text>
   );
 };
+const Text = styled.h1`
+  ${noMobile(css`
+    font-size: 24px;
+    font-weight: 600;
+  `)}
+`;
