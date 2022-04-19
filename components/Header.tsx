@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { SiNextdotjs, SiTypescript } from "react-icons/si";
-import { desktop, notdesktop, tablet } from "../utils/media";
+import { desktop, noMobile, notdesktop, tablet } from "../utils/media";
 import { useTheme } from "./Context/ThemeContext";
 import { ThemedText } from "./ThemedText";
 import { NodeNextRequest } from "next/dist/server/base-http/node";
