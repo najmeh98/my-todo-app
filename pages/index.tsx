@@ -4,12 +4,13 @@ import Image from "next/image";
 import { useCallback, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { Header } from "../components/Header";
+import { Item } from "../components/Item";
 import { Column, Row } from "../components/shared/Container";
 import { Space } from "../components/shared/Space";
 import SideBar from "../components/SideBar";
 import { TodoForm } from "../components/TodoForm";
 import { TodoList } from "../components/TodoList";
-import { Mobile, notdesktop, tablet } from "../utils/media";
+import { desktop, Mobile, noMobile, notdesktop, tablet } from "../utils/media";
 export interface Todoprop {
   id: number;
   value: string;
@@ -116,7 +117,7 @@ const Home: NextPage = () => {
     <Wrapper>
       <Container>
         <Header />
-        {/* <Space vertical={50} /> */}
+
         <MainContainer>
           <Row>
             <Column>
@@ -132,7 +133,8 @@ const Home: NextPage = () => {
             </Column>
             {/* <img src="No data-cuate.png" alt="emptyTask" /> */}
           </Row>
-          <SideBar
+
+          <Item
             filterHandler={filterHandler}
             setSelectedItem={setFilter}
             selectedItem={filter}
@@ -167,26 +169,33 @@ const Container = styled.div`
   height: 100%;
   min-height: 100%;
   width: 100%;
-  ${notdesktop(css`
+  ${tablet(css`
     padding: 20px;
+  `)}
+  ${Mobile(css`
+    padding: 15px;
+  `)}
+  ${desktop(css`
+    padding: 20px 50px;
   `)}
 `;
 const MainContainer = styled.div`
-  display: grid;
-  grid-template-columns: 40% 360px;
   gap: 80px;
-  justify-content: space-between;
-  height: 100%;
+  display: flex;
+
   margin-top: 40px;
   justify-content: space-between;
   ${tablet(css`
-    grid-template-columns: 50% 330px;
-    gap: 20px;
+    gap: 50px;
   `)}
   ${Mobile(css`
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
     width: 100%;
     gap: 20px;
+  `)}
+  ${notdesktop(css`
+    justify-content: space-between;
   `)}
 `;
