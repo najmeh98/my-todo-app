@@ -11,6 +11,12 @@ export const Mobile = (body: any) => css`
   }
 `;
 
+export const noMobile = (body: any) => css`
+  @media (max-width: 368px) {
+    ${body};
+  }
+`;
+
 export const tablet = (body: any) => css`
   @media (min-width: 800px) and (max-width: 1024px) {
     ${body};
