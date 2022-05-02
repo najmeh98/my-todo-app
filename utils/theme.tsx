@@ -2,21 +2,25 @@ import { Theme } from "../components/types/theme";
 
 export const darkTheme: Theme = {
   fontSize: {
-    normal: "16",
+    normal: "16px",
+    regular: "18px",
   },
   fontWeight: {
     regular: "400",
   },
   fontFamily: {
-    MainFont: "inherint",
+    MainFont: "inherit",
   },
   color: {
     background: "rgba(0, 0, 0, 0.2)",
-    containerBackground: "#0c4a6e",
+    // containerBackground: "#0c4a6e",
+    containerBackground: "#DD9BDD",
     textcolor: "rgba(6, 182, 212 , 1)",
     buttoncolor: "rgb(0,0,0,1)",
     InputBgcolor: "rgba(14 ,116 ,144, 1)",
     colorIcon: "#164e63",
+    optionbgColor: "#0e7490",
+    optionColor: "#14b8a6",
   },
   boxShadow: "rgba(8,145,178,.3)",
   modalBoxShadow: "rgba(6, 182, 212 , 0.5)",
