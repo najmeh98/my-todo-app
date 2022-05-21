@@ -161,6 +161,8 @@ const Wrapper = styled.div`
 const Container = styled.div`
   /* background-color: rgba(0, 0, 0, 0.2); */
   background-color: #1b212d;
+  box-shadow: "0 1px 11px hsl(0deg 0% 66% / 27%)";
+
   border-radius: 0.375rem;
   display: flex;
   flex-direction: column;
